@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+
+<div class="grid grid-cols-3 gap-4 mb-6">
+  <div class="bg-green-100 p-4 rounded shadow">
+    <h2 class="text-xl font-semibold">Income</h2>
+    <p class="text-2xl">₹{{ total_income }}</p>
+  </div>
+  <div class="bg-red-100 p-4 rounded shadow">
+    <h2 class="text-xl font-semibold">Expenses</h2>
+    <p class="text-2xl">₹{{ total_expense }}</p>
+  </div>
+  <div class="bg-blue-100 p-4 rounded shadow">
+    <h2 class="text-xl font-semibold">Balance</h2>
+    <p class="text-2xl">₹{{ balance }}</p>
+  </div>
+</div>
+
+<a href="{% url 'add_transaction' %}" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Transaction</a>
+
+<ul class="mt-6 space-y-2">
+  {% for t in transactions %}
+    <li class="bg-white p-4 rounded shadow flex justify-between items-center">
+      <div>
+        <div class="font-medium">{{ t.date }} - {{ t.category }} ({{ t.type }})</div>
+        <div class="text-sm text-gray-600">{{ t.description }}</div>
+      </div>
+      <div class="font-semibold">₹{{ t.amount }}</div>
+    </li>
+  {% empty %}
+    <li>No transactions found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
