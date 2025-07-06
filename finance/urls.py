@@ -10,4 +10,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('accounts/login/', LoginView.as_view(authentication_form=CustomLoginForm), name='login'),
+    path('transaction/edit/<int:pk>/', views.edit_transaction, name='edit_transaction'),
+    path('transaction/delete/<int:pk>/', views.delete_transaction, name='delete_transaction'),
 ]
